@@ -1,1 +1,19 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Posts on 我的博客</title><link>http://24.199.93.222/posts/</link><description>Recent content in Posts on 我的博客</description><generator>Hugo</generator><language>zh-CN</language><lastBuildDate>Fri, 30 May 2025 00:00:00 +0000</lastBuildDate><atom:link href="http://24.199.93.222/posts/index.xml" rel="self" type="application/rss+xml"/><item><title>Hello World</title><link>http://24.199.93.222/posts/hello-world/</link><pubDate>Fri, 30 May 2025 00:00:00 +0000</pubDate><guid>http://24.199.93.222/posts/hello-world/</guid><description>&lt;p>欢迎来到我的博客！&lt;/p></description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Posts on 我的博客</title>
+    <link>http://localhost:1313/posts/</link>
+    <description>Recent content in Posts on 我的博客</description>
+    <generator>Hugo</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Fri, 30 May 2025 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Hello World</title>
+      <link>http://localhost:1313/posts/hello-world/</link>
+      <pubDate>Fri, 30 May 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/hello-world/</guid>
+      <description>&lt;p&gt;欢迎来到我的博客！&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>
