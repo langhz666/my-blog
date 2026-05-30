@@ -1,0 +1,41 @@
+baseURL = "http://24.199.93.222/"
+languageCode = "zh-CN"
+title = "我的博客"
+theme = "PaperMod"
+
+[params]
+env = "production"
+description = "记录学习与生活的点滴"
+defaultTheme = "auto"
+ShowReadingTime = true
+ShowPostNavLinks = true
+ShowBreadCrumbs = true
+ShowCodeCopyButtons = true
+ShowWordCount = true
+showtoc = true
+
+[params.homeInfoParams]
+Title = "欢迎来到我的博客"
+Content = "分享技术，记录生活"
+
+[[menu.main]]
+identifier = "posts"
+name = "文章"
+url = "/posts/"
+weight = 10
+
+[[menu.main]]
+identifier = "tags"
+name = "标签"
+url = "/tags/"
+weight = 20
+
+[[menu.main]]
+identifier = "archives"
+name = "归档"
+url = "/archives/"
+weight = 30
+
+[taxonomies]
+category = "categories"
+tag = "tags"
