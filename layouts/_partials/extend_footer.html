@@ -1,0 +1,254 @@
+{{- /* ===== 博客增强交互脚本 ===== */ -}}
+
+<canvas id="particles-canvas"></canvas>
+
+{{- if .IsPage }}
+<div class="reading-progress" id="readingProgress"></div>
+{{- end }}
+
+<div class="fab-container" id="fabContainer">
+    <button class="fab-btn" onclick="scrollToTop()" title="回到顶部">↑</button>
+    <button class="fab-btn" onclick="toggleToc()" title="目录">☰</button>
+    <button class="fab-btn" id="themeToggleFab" onclick="toggleThemeFab()" title="切换主题">◐</button>
+</div>
+
+<script>
+(function() {
+    'use strict';
+
+    /* ===== 粒子背景 ===== */
+    const canvas = document.getElementById('particles-canvas');
+    if (canvas) {
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+        const PARTICLE_COUNT = 40;
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+
+        function createParticle() {
+            return {
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height,
+                vx: (Math.random() - 0.5) * 0.3,
+                vy: (Math.random() - 0.5) * 0.3,
+                radius: Math.random() * 2 + 0.5,
+                opacity: Math.random() * 0.4 + 0.1
+            };
+        }
+
+        function initParticles() {
+            particles = [];
+            for (let i = 0; i < PARTICLE_COUNT; i++) {
+                particles.push(createParticle());
+            }
+        }
+
+        function drawParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+            const color = isDark ? '129, 140, 248' : '102, 126, 234';
+
+            particles.forEach(p => {
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+                ctx.fillStyle = 'rgba(' + color + ', ' + p.opacity + ')';
+                ctx.fill();
+
+                p.x += p.vx;
+                p.y += p.vy;
+
+                if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
+                if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
+            });
+
+            /* 粒子连线 */
+            for (let i = 0; i < particles.length; i++) {
+                for (let j = i + 1; j < particles.length; j++) {
+                    const dx = particles[i].x - particles[j].x;
+                    const dy = particles[i].y - particles[j].y;
+                    const dist = Math.sqrt(dx * dx + dy * dy);
+                    if (dist < 150) {
+                        ctx.beginPath();
+                        ctx.moveTo(particles[i].x, particles[i].y);
+                        ctx.lineTo(particles[j].x, particles[j].y);
+                        ctx.strokeStyle = 'rgba(' + color + ', ' + (0.08 * (1 - dist / 150)) + ')';
+                        ctx.lineWidth = 0.5;
+                        ctx.stroke();
+                    }
+                }
+            }
+
+            requestAnimationFrame(drawParticles);
+        }
+
+        resizeCanvas();
+        initParticles();
+        drawParticles();
+        window.addEventListener('resize', () => { resizeCanvas(); });
+    }
+
+    /* ===== 页面进入动画 ===== */
+    document.addEventListener('DOMContentLoaded', function() {
+        document.body.classList.add('page-enter');
+    });
+
+    /* ===== 阅读进度条 ===== */
+    const progressBar = document.getElementById('readingProgress');
+    if (progressBar) {
+        window.addEventListener('scroll', function() {
+            const scrollTop = window.scrollY;
+            const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+            const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+            progressBar.style.width = progress + '%';
+        });
+    }
+
+    /* ===== 滚动触发动画 ===== */
+    function initScrollAnimations() {
+        const elements = document.querySelectorAll('.post-content h2, .post-content h3, .post-content p, .post-content ul, .post-content blockquote, .post-content pre');
+        if (!elements.length) return;
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(function(entry) {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
+
+        elements.forEach(function(el) {
+            observer.observe(el);
+        });
+    }
+
+    /* ===== FAB 按钮显示/隐藏 ===== */
+    const fabContainer = document.getElementById('fabContainer');
+    if (fabContainer) {
+        window.addEventListener('scroll', function() {
+            if (window.scrollY > 300) {
+                fabContainer.classList.add('visible');
+            } else {
+                fabContainer.classList.remove('visible');
+            }
+        });
+    }
+
+    /* ===== 回到顶部 ===== */
+    window.scrollToTop = function() {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
+
+    /* ===== 主题切换 ===== */
+    window.toggleThemeFab = function() {
+        const html = document.documentElement;
+        const current = html.getAttribute('data-theme');
+        const next = current === 'dark' ? 'light' : 'dark';
+        html.setAttribute('data-theme', next);
+        localStorage.setItem('theme', next);
+        /* 更新图标 */
+        const btn = document.getElementById('themeToggleFab');
+        if (btn) btn.textContent = next === 'dark' ? '☀' : '◐';
+    };
+
+    /* 同步 FAB 主题图标 */
+    function syncThemeIcon() {
+        const theme = document.documentElement.getAttribute('data-theme');
+        const btn = document.getElementById('themeToggleFab');
+        if (btn) btn.textContent = theme === 'dark' ? '☀' : '◐';
+    }
+
+    /* ===== TOC 切换 ===== */
+    window.toggleToc = function() {
+        const toc = document.querySelector('.toc');
+        if (toc) {
+            toc.style.display = toc.style.display === 'none' ? 'block' : 'none';
+        }
+    };
+
+    /* ===== 文章反应按钮 ===== */
+    window.toggleReaction = function(btn) {
+        const type = btn.getAttribute('data-type');
+        const slug = window.location.pathname.replace(/\//g, '_');
+        const storageKey = 'reaction_' + slug + '_' + type;
+        const countEl = btn.querySelector('.count');
+        let count = parseInt(countEl.textContent) || 0;
+
+        if (btn.classList.contains('active')) {
+            btn.classList.remove('active');
+            count = Math.max(0, count - 1);
+            localStorage.removeItem(storageKey);
+        } else {
+            btn.classList.add('active');
+            count += 1;
+            localStorage.setItem(storageKey, '1');
+            /* 按钮弹跳动画 */
+            btn.style.transform = 'scale(1.15)';
+            setTimeout(() => { btn.style.transform = ''; }, 200);
+        }
+        countEl.textContent = count;
+        localStorage.setItem('reaction_' + slug + '_' + type + '_count', count);
+    };
+
+    /* 恢复反应状态 */
+    function restoreReactions() {
+        const slug = window.location.pathname.replace(/\//g, '_');
+        document.querySelectorAll('.reaction-btn').forEach(function(btn) {
+            const type = btn.getAttribute('data-type');
+            const storageKey = 'reaction_' + slug + '_' + type;
+            const countKey = storageKey + '_count';
+            const countEl = btn.querySelector('.count');
+            const savedCount = localStorage.getItem(countKey);
+            if (savedCount) countEl.textContent = savedCount;
+            if (localStorage.getItem(storageKey)) btn.classList.add('active');
+        });
+    }
+
+    /* ===== 打字动画 (Profile 首页) ===== */
+    function initTypingEffect() {
+        const subtitle = document.querySelector('.entry-header .subtitle, .home-info .entry-header h2');
+        if (!subtitle || !subtitle.textContent) return;
+
+        const text = subtitle.textContent;
+        subtitle.textContent = '';
+        subtitle.style.visibility = 'visible';
+
+        const cursor = document.createElement('span');
+        cursor.className = 'typing-cursor';
+        subtitle.appendChild(cursor);
+
+        let i = 0;
+        function type() {
+            if (i < text.length) {
+                cursor.before(document.createTextNode(text.charAt(i)));
+                i++;
+                setTimeout(type, 60 + Math.random() * 40);
+            } else {
+                /* 光标闪烁一段时间后消失 */
+                setTimeout(() => { cursor.style.opacity = '0'; }, 2000);
+            }
+        }
+        setTimeout(type, 500);
+    }
+
+    /* ===== 初始化 ===== */
+    document.addEventListener('DOMContentLoaded', function() {
+        initScrollAnimations();
+        restoreReactions();
+        syncThemeIcon();
+        if (document.querySelector('.profile-mode')) {
+            initTypingEffect();
+        }
+    });
+
+    /* 监听主题切换（来自主题自带按钮） */
+    const observer = new MutationObserver(function() {
+        syncThemeIcon();
+    });
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+
+})();
+</script>

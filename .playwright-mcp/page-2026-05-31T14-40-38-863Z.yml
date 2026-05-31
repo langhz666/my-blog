@@ -1,0 +1,107 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - navigation [ref=e3]:
+      - generic [ref=e4]:
+        - link "PaperMod" [ref=e5] [cursor=pointer]:
+          - /url: https://adityatelange.github.io/hugo-PaperMod/
+        - generic [ref=e6]:
+          - button "Toggle theme" [ref=e7] [cursor=pointer]:
+            - img [ref=e8]
+          - generic [ref=e10]: "|"
+          - list [ref=e11]:
+            - listitem [ref=e12]:
+              - link "French" [ref=e13] [cursor=pointer]:
+                - /url: https://adityatelange.github.io/hugo-PaperMod/fr/
+            - listitem [ref=e14]:
+              - link "Farsi" [ref=e15] [cursor=pointer]:
+                - /url: https://adityatelange.github.io/hugo-PaperMod/fa/
+      - list [ref=e16]:
+        - listitem [ref=e17]:
+          - link "About" [ref=e18] [cursor=pointer]:
+            - /url: https://adityatelange.github.io/hugo-PaperMod/about
+        - listitem [ref=e19]:
+          - link "Archive" [ref=e20] [cursor=pointer]:
+            - /url: https://adityatelange.github.io/hugo-PaperMod/archives
+        - listitem [ref=e21]:
+          - link "Search" [ref=e22] [cursor=pointer]:
+            - /url: https://adityatelange.github.io/hugo-PaperMod/search/
+        - listitem [ref=e23]:
+          - link "Tags" [ref=e24] [cursor=pointer]:
+            - /url: https://adityatelange.github.io/hugo-PaperMod/tags/
+        - listitem [ref=e25]:
+          - link "Docs (Wiki)" [ref=e26] [cursor=pointer]:
+            - /url: https://github.com/adityatelange/hugo-PaperMod/wiki/
+            - text: Docs (Wiki)
+            - img [ref=e27]
+  - main [ref=e31]:
+    - article [ref=e32]:
+      - heading "PaperMod’s Demo" [level=1] [ref=e34]
+      - generic [ref=e35]:
+        - paragraph [ref=e36]:
+          - text: A clean, fast, and responsive Hugo theme built for a polished reading experience.
+          - link "Read more.." [ref=e37] [cursor=pointer]:
+            - /url: /hugo-PaperMod/about/
+        - list [ref=e38]:
+          - listitem [ref=e39]: Lightweight by design, with a modern layout that keeps your content front and center.
+          - listitem [ref=e40]:
+            - text: Explore the
+            - link "Docs (Wiki)" [ref=e41] [cursor=pointer]:
+              - /url: https://github.com/adityatelange/hugo-PaperMod/wiki/
+            - text: to learn more about features and configuration.
+          - listitem [ref=e42]:
+            - text: Support the project on
+            - link "GitHub" [ref=e43] [cursor=pointer]:
+              - /url: https://github.com/adityatelange/hugo-PaperMod
+            - text: and share it with others who love minimalistic designs.
+          - listitem [ref=e44]:
+            - text: PaperMod is inspired by the
+            - link "Paper" [ref=e45] [cursor=pointer]:
+              - /url: https://github.com/nanxiaobei/hugo-paper/tree/4330c8b12aa48bfdecbcad6ad66145f679a430b3
+            - text: theme.
+      - generic [ref=e47]:
+        - link "View Source on Github" [ref=e48] [cursor=pointer]:
+          - /url: https://github.com/adityatelange/hugo-PaperMod
+          - img [ref=e49]
+        - link "Join Discord Community" [ref=e50] [cursor=pointer]:
+          - /url: https://discord.gg/ahpmTvhVmp
+          - img [ref=e51]
+        - link "Share PaperMod on X/Twitter" [ref=e53] [cursor=pointer]:
+          - /url: https://x.com/intent/tweet/?text=Checkout%20Hugo%20PaperMod%20%E2%9C%A8%0AA%20fast,%20clean,%20responsive%20Hugo%20theme.&url=https://github.com/adityatelange/hugo-PaperMod&hashtags=Hugo,PaperMod
+          - img [ref=e54]
+        - link "Buy Me a Ko-Fi :)" [ref=e55] [cursor=pointer]:
+          - /url: https://ko-fi.com/adityatelange
+          - img [ref=e56]
+    - article [ref=e58]:
+      - heading "PaperMod Installation Guide" [level=2] [ref=e60]
+      - paragraph [ref=e62]: Step by step guide to install and update PaperMod in your Hugo site.
+      - generic [ref=e63]: January 20, 2021 · 3 min · Aditya Telange
+      - link "post link to PaperMod Installation Guide" [ref=e64] [cursor=pointer]:
+        - /url: https://adityatelange.github.io/hugo-PaperMod/posts/papermod/papermod-installation/
+    - article [ref=e65]:
+      - heading "Markdown Syntax Guide" [level=2] [ref=e67]
+      - paragraph [ref=e69]: This article offers a sample of basic Markdown syntax that can be used in Hugo content files, also it shows whether basic HTML elements are decorated with CSS in a Hugo theme. ...
+      - generic [ref=e70]: March 11, 2019 · 2 min · Hugo Authors
+      - link "post link to Markdown Syntax Guide" [ref=e71] [cursor=pointer]:
+        - /url: https://adityatelange.github.io/hugo-PaperMod/posts/markdown-syntax/
+    - article [ref=e72]:
+      - heading "Code Syntax Guide" [level=2] [ref=e74]
+      - paragraph [ref=e76]: Sample article showcasing basic code syntax and formatting for HTML elements.
+      - generic [ref=e77]: March 10, 2019 · 2 min · Aditya Telange
+      - link "post link to Code Syntax Guide" [ref=e78] [cursor=pointer]:
+        - /url: https://adityatelange.github.io/hugo-PaperMod/posts/code_syntax/
+    - navigation [ref=e80]:
+      - link "Next 2/4 »" [ref=e81] [cursor=pointer]:
+        - /url: https://adityatelange.github.io/hugo-PaperMod/page/2/
+  - contentinfo [ref=e82]:
+    - generic [ref=e83]:
+      - text: ©
+      - link "PaperMod Contributors" [ref=e84] [cursor=pointer]:
+        - /url: https://github.com/adityatelange/hugo-PaperMod/graphs/contributors
+    - text: ·
+    - generic [ref=e85]:
+      - text: Powered by
+      - link "Hugo" [ref=e86] [cursor=pointer]:
+        - /url: https://gohugo.io/?utm_source=papermod
+      - text: "&"
+      - link "PaperMod" [ref=e87] [cursor=pointer]:
+        - /url: https://github.com/adityatelange/hugo-PaperMod/

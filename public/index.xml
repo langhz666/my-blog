@@ -5,7 +5,7 @@
     <link>http://localhost:1313/</link>
     <description>Recent content on 我的博客</description>
     <generator>Hugo</generator>
-    <language>zh-CN</language>
+    <language>zh-cn</language>
     <lastBuildDate>Sat, 30 May 2026 00:00:00 +0000</lastBuildDate>
     <atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
     <item>
@@ -49,6 +49,15 @@
       <pubDate>Fri, 30 May 2025 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/posts/hello-world/</guid>
       <description>&lt;p&gt;欢迎来到我的博客！&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>邮箱联系方式</title>
+      <link>http://localhost:1313/contact/</link>
+      <pubDate>Wed, 01 Jan 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/contact/</guid>
+      <description>&lt;p&gt;你好！很高兴能与你交流。👋&lt;/p&gt;
+&lt;p&gt;我的 QQ 邮箱是：&lt;strong&gt;&lt;a href=&#34;mailto:3204498297@qq.com&#34;&gt;3204498297@qq.com&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;欢迎随时给我发邮件！&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>

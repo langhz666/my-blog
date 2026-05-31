@@ -1,0 +1,51 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - navigation [ref=e3]:
+      - generic [ref=e4]:
+        - link "我的博客" [ref=e5] [cursor=pointer]:
+          - /url: http://localhost:1313/
+        - button "Toggle theme" [ref=e7] [cursor=pointer]:
+          - img [ref=e8]
+      - list [ref=e10]:
+        - listitem [ref=e11]:
+          - link "文章" [ref=e12] [cursor=pointer]:
+            - /url: http://localhost:1313/posts/
+        - listitem [ref=e13]:
+          - link "标签" [ref=e14] [cursor=pointer]:
+            - /url: http://localhost:1313/tags/
+        - listitem [ref=e15]:
+          - link "归档" [ref=e16] [cursor=pointer]:
+            - /url: http://localhost:1313/archives/
+        - listitem [ref=e17]:
+          - link "搜索" [ref=e18] [cursor=pointer]:
+            - /url: http://localhost:1313/search/
+  - main [ref=e19]:
+    - generic [ref=e21]:
+      - heading "我的博客" [level=1] [ref=e22]
+      - generic [ref=e23]: 分享技术，记录生活
+      - generic [ref=e24]:
+        - link "文章" [ref=e25] [cursor=pointer]:
+          - /url: /posts/
+        - link "标签" [ref=e26] [cursor=pointer]:
+          - /url: /tags/
+        - link "归档" [ref=e27] [cursor=pointer]:
+          - /url: /archives/
+        - link "搜索" [ref=e28] [cursor=pointer]:
+          - /url: /search/
+  - contentinfo [ref=e29]:
+    - generic [ref=e30]:
+      - text: © 2026
+      - link "我的博客" [ref=e31] [cursor=pointer]:
+        - /url: http://localhost:1313/
+    - text: ·
+    - generic [ref=e32]:
+      - text: Powered by
+      - link "Hugo" [ref=e33] [cursor=pointer]:
+        - /url: https://gohugo.io/?utm_source=papermod
+      - text: "&"
+      - link "PaperMod" [ref=e34] [cursor=pointer]:
+        - /url: https://github.com/adityatelange/hugo-PaperMod/
+  - generic [ref=e35]:
+    - button "↑" [ref=e36] [cursor=pointer]
+    - button "☰" [ref=e37] [cursor=pointer]
+    - button "◐" [ref=e38] [cursor=pointer]

@@ -1,0 +1,138 @@
+{{- define "main" }}
+
+<section id="home-profile" class="home-profile">
+    <div class="profile-card">
+        {{- with site.Params.profileMode.imageUrl }}
+        <img class="profile-avatar-img" src="{{ . | absURL }}" alt="avatar" width="120" height="120" />
+        {{- else }}
+        <div class="profile-avatar-fallback">
+            <span>{{ substr site.Title 0 1 }}</span>
+        </div>
+        {{- end }}
+
+        <h1 class="profile-name">{{ site.Params.profileMode.title | default site.Title | markdownify }}</h1>
+        <p class="profile-subtitle">{{ site.Params.profileMode.subtitle | default "" | markdownify }}</p>
+
+        {{- with site.Params.profileBio }}
+        <p class="profile-bio">{{ . | markdownify }}</p>
+        {{- end }}
+
+        {{- with site.Params.homepageSocial }}
+        <div class="profile-social">
+            {{- range . }}
+            <a href="{{ .url | safeURL }}" class="social-pill"
+               {{- if not (strings.HasPrefix .url "mailto:") }} target="_blank" rel="noopener noreferrer"{{- end }}
+               title="{{ .name }}">
+                {{- if .icon }}<span class="social-icon">{{ .icon }}</span>{{- end }}
+                <span>{{ .name }}</span>
+            </a>
+            {{- end }}
+        </div>
+        {{- end }}
+
+        {{- with site.Params.profileMode.buttons }}
+        <div class="profile-cta">
+            {{- range . }}
+            <a class="cta-btn" href="{{ .url | safeURL }}" title="{{ .name }}">
+                {{ .name }}
+            </a>
+            {{- end }}
+        </div>
+        {{- end }}
+    </div>
+</section>
+
+<section class="home-content" id="home-articles">
+    <div class="home-grid">
+        <div class="home-main">
+            <h2 class="section-title">{{ i18n "recent_articles" | default "最新文章" }}</h2>
+
+            {{- $pages := where site.RegularPages "Type" "in" site.Params.mainSections }}
+            {{- $pages = where $pages "Params.hiddenInHomeList" "!=" "true" }}
+            {{- $paginator := .Paginate $pages }}
+
+            {{- range $index, $page := $paginator.Pages }}
+            <article class="article-card">
+                <div class="article-meta">
+                    <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date | time.Format (default ":date_long" site.Params.DateFormat) }}</time>
+                    {{- with .Params.categories }}
+                    <span class="meta-sep">&middot;</span>
+                    <span class="article-category">{{ index . 0 }}</span>
+                    {{- end }}
+                    {{- if site.Params.ShowReadingTime }}
+                    <span class="meta-sep">&middot;</span>
+                    <span>{{ .ReadingTime }} min</span>
+                    {{- end }}
+                </div>
+
+                <h3 class="article-title">
+                    <a href="{{ .Permalink }}">{{ .Title }}</a>
+                </h3>
+
+                <p class="article-excerpt">{{ .Summary | plainify | htmlUnescape }}{{ if .Truncated }}...{{ end }}</p>
+
+                {{- with .Params.tags }}
+                <div class="article-tags">
+                    {{- range . }}
+                    <span class="tag-pill">{{ . }}</span>
+                    {{- end }}
+                </div>
+                {{- end }}
+            </article>
+            {{- end }}
+
+            {{- if gt $paginator.TotalPages 1 }}
+            <nav class="pagination">
+                {{- if $paginator.HasPrev }}
+                <a class="prev" href="{{ $paginator.Prev.URL | absURL }}">&laquo; {{ i18n "prev_page" }}</a>
+                {{- end }}
+                {{- if $paginator.HasNext }}
+                <a class="next" href="{{ $paginator.Next.URL | absURL }}">{{ i18n "next_page" }} &raquo;</a>
+                {{- end }}
+            </nav>
+            {{- end }}
+        </div>
+
+        <aside class="home-sidebar">
+            <div class="sidebar-widget">
+                <h3 class="widget-title">🔥 热门文章</h3>
+                <ul class="widget-list">
+                    {{- $pagesByViews := where site.RegularPages "Type" "in" site.Params.mainSections }}
+                    {{- $pagesByViews = where $pagesByViews "Params.hiddenInHomeList" "!=" "true" }}
+                    {{- $topViews := sort $pagesByViews "Params.views" "desc" | first 5 }}
+                    {{- if $topViews }}
+                        {{- range $topViews }}
+                        <li>
+                            <a href="{{ .Permalink }}"><span class="list-title">{{ .Title }}</span></a>
+                            <span class="widget-list-meta">{{ .Params.views | default 0 }} 阅读</span>
+                        </li>
+                        {{- end }}
+                    {{- else }}
+                        <li class="widget-list-empty">暂无文章或未配置 views 属性</li>
+                    {{- end }}
+                </ul>
+            </div>
+
+            <div class="sidebar-widget">
+                <h3 class="widget-title">👍 最多点赞</h3>
+                <ul class="widget-list">
+                    {{- $pagesByLikes := where site.RegularPages "Type" "in" site.Params.mainSections }}
+                    {{- $pagesByLikes = where $pagesByLikes "Params.hiddenInHomeList" "!=" "true" }}
+                    {{- $topLikes := sort $pagesByLikes "Params.likes" "desc" | first 5 }}
+                    {{- if $topLikes }}
+                        {{- range $topLikes }}
+                        <li>
+                            <a href="{{ .Permalink }}"><span class="list-title">{{ .Title }}</span></a>
+                            <span class="widget-list-meta">{{ .Params.likes | default 0 }} 赞</span>
+                        </li>
+                        {{- end }}
+                    {{- else }}
+                        <li class="widget-list-empty">暂无文章或未配置 likes 属性</li>
+                    {{- end }}
+                </ul>
+            </div>
+        </aside>
+    </div>
+</section>
+
+{{- end }}
